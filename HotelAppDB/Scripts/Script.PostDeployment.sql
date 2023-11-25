@@ -15,12 +15,12 @@ Post-Deployment Script Template
 	table named RoomTypes in a database, but only if the table currently contains no records*/
 if not exists (select 1 from dbo.RoomTypes)
 begin
-	insert into dbo.RoomTypes (Title, Description)
-    values ('King Size Bed', 'A room with a king-size bed and window.'),
-		   ('Two Queen Size Beds', 'A room with two queen-size beds and window.'),
-		   ('Executive Suite', 'Two room, each with a king-size bed and window.'),
-		   ('Double Bed', 'A room with two double beds and window.'),
-		   ('Single Bed', 'A room with a single bed and window.')
+	insert into dbo.RoomTypes (Title, Description, Price)
+    values ('King Size Bed', 'A room with a king-size bed and window.', 100),
+		   ('Two Queen Size Beds', 'A room with two queen-size beds and window.', 150),
+		   ('Executive Suite', 'Two room, each with a king-size bed and window.', 285),
+		   ('Double Bed', 'A room with two double beds and window.', 80),
+		   ('Single Bed', 'A room with a single bed and window.', 50)
 end
 
 /* The provided code snippet is a SQL script designed to insert data into a 
