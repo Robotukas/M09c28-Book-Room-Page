@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29521.150
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HotelAppDB", "HotelAppDB\HotelAppDB.sqlproj", "{B79AD7D6-4733-4FCA-9DDB-78751C68AE45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelAppLibrary", "HotelAppLibrary\HotelAppLibrary.csproj", "{3780F827-2116-43B4-82E6-065232405DEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{B79AD7D6-4733-4FCA-9DDB-78751C68AE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B79AD7D6-4733-4FCA-9DDB-78751C68AE45}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B79AD7D6-4733-4FCA-9DDB-78751C68AE45}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3780F827-2116-43B4-82E6-065232405DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3780F827-2116-43B4-82E6-065232405DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3780F827-2116-43B4-82E6-065232405DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3780F827-2116-43B4-82E6-065232405DEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
