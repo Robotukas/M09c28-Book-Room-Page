@@ -87,5 +87,19 @@ namespace HotelAppLibrary.Data
                          connectionStringName,
                          true);
         }                               
+
+        /// <summary>
+        /// The SearchBookings method is designed to retrieve a list of bookings for a specified guest
+        /// with current date as the start date.
+        /// </summary>
+        /// <param name="lastName"></param>
+        /// <returns></returns>
+        public List<BookingFullModel> SearchBookings(string lastName)
+        {
+            return _db.LoadData<BookingFullModel, dynamic>("dbo.spBookings_Search",
+                                                    new { lastName, startDate =DateTime.Now.Date },
+                                                    connectionStringName,
+                                                    true);
+        }
     }
 }
