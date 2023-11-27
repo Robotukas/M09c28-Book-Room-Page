@@ -14,7 +14,7 @@ namespace HotelAppLibrary.Data
     /// <param name="startDate">The start date of the booking</param>
     /// <param name="endDate">The end date of the booking</param>
     /// <returns>A list of available room types</returns></returns>
-    public class SqlData
+    public class SqlData : IDatabaseData
     {
         private readonly ISqlDataAccess _db;
         private const string connectionStringName = "SqlDb";
@@ -57,11 +57,11 @@ namespace HotelAppLibrary.Data
                               DateTime endDate,
                               int roomTypeId)
         {
-            
+
             GuestModel guest = _db.LoadData<GuestModel, dynamic>("dbo.spGuests_Insert",
-                                                                 new {firstName, lastName },
+                                                                 new { firstName, lastName },
                                                                  connectionStringName,
-                                                                 true).First(); 
+                                                                 true).First();
 
             RoomTypeModel roomType = _db.LoadData<RoomTypeModel, dynamic>("dbo.spRoomType_GetById where Id = @Id",
                                                                           new { Id = roomTypeId },
@@ -69,24 +69,24 @@ namespace HotelAppLibrary.Data
                                                                            false).First();
 
             TimeSpan timeStaying = endDate.Date.Subtract(startDate.Date);
-            
+
             List<RoomModel> availableRooms = _db.LoadData<RoomModel, dynamic>("dbo.spRooms_GetAvailableRooms",
                                                                               new { startDate, endDate, roomTypeId },
                                                                               connectionStringName,
                                                                               true);
 
             _db.SaveData("dbo.spBookings_Insert",
-                         new 
-                         { 
+                         new
+                         {
                              roomId = availableRooms.First().Id,
                              guestId = guest.Id,
-                             startDate = startDate, 
+                             startDate = startDate,
                              endDate = endDate,
                              totalCost = timeStaying.Days * roomType.Price
                          },
                          connectionStringName,
                          true);
-        }                               
+        }
 
         /// <summary>
         /// The SearchBookings method is designed to retrieve a list of bookings for a specified guest
@@ -97,9 +97,21 @@ namespace HotelAppLibrary.Data
         public List<BookingFullModel> SearchBookings(string lastName)
         {
             return _db.LoadData<BookingFullModel, dynamic>("dbo.spBookings_Search",
-                                                    new { lastName, startDate =DateTime.Now.Date },
+                                                    new { lastName, startDate = DateTime.Now.Date },
                                                     connectionStringName,
                                                     true);
+        }
+
+        /// <summary>
+        /// The CheckInGuest method is designed to check in a guest for a specified booking.
+        /// </summary>
+        /// <param name="bookingId"></param>
+        public void CheckInGuest(int bookingId)
+        {
+            _db.SaveData("dbo.spBookings_CheckIn",
+                                        new { Id = bookingId },
+                                        connectionStringName,
+                                        true);
         }
     }
 }
