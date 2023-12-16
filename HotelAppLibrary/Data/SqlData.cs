@@ -63,10 +63,10 @@ namespace HotelAppLibrary.Data
                                                                  connectionStringName,
                                                                  true).First();
 
-            RoomTypeModel roomType = _db.LoadData<RoomTypeModel, dynamic>("dbo.spRoomType_GetById where Id = @Id",
+            RoomTypeModel roomType = _db.LoadData<RoomTypeModel, dynamic>("select * from dbo.RoomTypes where Id = @Id",
                                                                           new { Id = roomTypeId },
                                                                           connectionStringName,
-                                                                           false).First();
+                                                                          false).First();
 
             TimeSpan timeStaying = endDate.Date.Subtract(startDate.Date);
 
@@ -112,6 +112,19 @@ namespace HotelAppLibrary.Data
                                         new { Id = bookingId },
                                         connectionStringName,
                                         true);
+        }
+
+        /// <summary>
+        /// The CheckOutGuest method is designed to check out a guest for a specified booking.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public RoomTypeModel GetRoomTypeById(int id)
+        {
+            return _db.LoadData<RoomTypeModel, dynamic>("dbo.spRoomTypes_GetById",
+                                                        new { id },
+                                                        connectionStringName,
+                                                        true).FirstOrDefault();
         }
     }
 }
