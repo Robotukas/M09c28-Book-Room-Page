@@ -17,3 +17,32 @@
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
+
+@if (Model.AvailableRoomsTypes?.Count > 0) // "?" check if value is null before next step. In this scenario "AvailableRoomsTypes"" is null when it stops before count.
+{
+    <br />
+    <h2>Results</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Room Type</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var room in Model.AvailableRoomsTypes)
+            {
+                <tr>
+                    <td>
+                        <strong>@room.Title</strong><br />
+                        @room.Description
+                    </td>
+                    <td>@string.Format("{0:C}",room.Price)</td>
+                    <td><a href="">Book Now</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
